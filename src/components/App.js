@@ -47,6 +47,27 @@ class App extends Component {
         });
     };
 
+    renderNotesEs6 = () => {
+        const notesArray = Object.entries(this.state.notes);
+        console.log('notesArray', notesArray);
+        if (notesArray.length > 0) {
+            const mapped = notesArray.map((note) => {
+                if (note.title !== undefined) {
+                    console.log('not undefined');
+                    return (
+                        <div key={note.title + 'a'}>
+                            <h2>{note.title}</h2>
+                            <p>{note.body}</p>
+                        </div>
+                    );
+                } else {
+                    console.log('undefined');
+                }
+            });
+            return mapped;
+        }
+    };
+
     render() {
         return (
             <div className='container-fluid'>
