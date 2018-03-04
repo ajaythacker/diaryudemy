@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { database } from '../firebase';
+import _ from 'lodash';
 
 class App extends Component {
     state = {
         title: '',
-        body: ''
+        body: '',
+        notes: {}
     };
+
+    //lifecycle
+    componentDidMount() {
+        database.on('value', (snapshot) => {
+            this.setState({
+                notes: snapshot.val()
+            });
+        });
+    }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -21,6 +32,18 @@ class App extends Component {
         this.setState({
             title: '',
             body: ''
+        });
+    };
+
+    //render posts
+    renderNotes = () => {
+        return _.map(this.state.notes, (note, key) => {
+            return (
+                <div key={key}>
+                    <h2>{note.title}</h2>
+                    <p>{note.body}</p>
+                </div>
+            );
         });
     };
 
@@ -57,6 +80,8 @@ class App extends Component {
                                 <button className='btn btn-primary col-sm-12'>Save</button>
                             </div>
                         </form>
+
+                        {this.renderNotes()}
                     </div>
                 </div>
             </div>
