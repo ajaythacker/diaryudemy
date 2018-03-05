@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { getNotes, saveNote } from '../actions/notesAction';
+import { getNotes, saveNote, deleteNote } from '../actions/notesAction';
 
 class App extends Component {
     state = {
@@ -38,6 +38,9 @@ class App extends Component {
                 <div key={key}>
                     <h2>{note.title}</h2>
                     <p>{note.body}</p>
+                    <button className='btn btn-danger btn-xs' onClick={() => this.props.deleteNote(key)}>
+                        Delete
+                    </button>
                 </div>
             );
         });
@@ -127,9 +130,12 @@ function mapDispatchToProps(dispatch, ownProps) {
         },
         saveNote: (note) => {
             dispatch(saveNote(note));
+        },
+        deleteNote: (id) => {
+            dispatch(deleteNote(id));
         }
     };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-//or we could have written export default connect(mapStateToProps,{getNotes,saveNote})(App);
+//or we could have written export default connect(mapStateToProps,{getNotes,saveNote,deleteNote})(App);
