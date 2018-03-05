@@ -1,9 +1,18 @@
 import React from 'react';
 
-const NoteCard = (props) => {
+// const NoteCard = (props) => {
+//     return (
+//         <div className='jumbotron'>
+//             <div>{props.children}</div>
+//         </div>
+//     );
+// };
+
+//or use object desctructuring to get children from props
+const NoteCard = ({ children }) => {
     return (
         <div className='jumbotron'>
-            <div>{props.children}</div>
+            <div>{children}</div>
         </div>
     );
 };
