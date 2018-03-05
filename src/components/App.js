@@ -6,8 +6,7 @@ import { getNotes, saveNote } from '../actions/notesAction';
 class App extends Component {
     state = {
         title: '',
-        body: '',
-        notes: {}
+        body: ''
     };
 
     //lifecycle
@@ -34,7 +33,7 @@ class App extends Component {
 
     //render posts
     renderNotes = () => {
-        return _.map(this.state.notes, (note, key) => {
+        return _.map(this.props.notes, (note, key) => {
             return (
                 <div key={key}>
                     <h2>{note.title}</h2>
