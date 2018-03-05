@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { database } from '../firebase';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import { getNotes, saveNote } from '../actions/notesAction';
 
 class App extends Component {
     state = {
@@ -11,11 +12,7 @@ class App extends Component {
 
     //lifecycle
     componentDidMount() {
-        database.on('value', (snapshot) => {
-            this.setState({
-                notes: snapshot.val()
-            });
-        });
+        this.props.getNotes();
     }
 
     handleChange = (e) => {
@@ -28,7 +25,7 @@ class App extends Component {
             title: this.state.title,
             body: this.state.body
         };
-        database.push(note);
+        this.props.saveNote(note);
         this.setState({
             title: '',
             body: ''
@@ -110,4 +107,30 @@ class App extends Component {
     }
 }
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    return {
+        notes: state.notes
+    };
+}
+
+// function const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         dispatch1: () => {
+//             dispatch(actionCreator)
+//         }
+//     }
+// }
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        getNotes: () => {
+            dispatch(getNotes());
+        },
+        saveNote: (note) => {
+            dispatch(saveNote(note));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+//or we could have written export default connect(mapStateToProps,{getNotes,saveNote})(App);

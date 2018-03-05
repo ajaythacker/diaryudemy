@@ -6,7 +6,7 @@ export function getNotes() {
         database.on('value', (snapshot) => {
             dispatch({
                 type: GET_NOTES,
-                payload: snapshot.val
+                payload: snapshot.val()
             });
         });
     };
