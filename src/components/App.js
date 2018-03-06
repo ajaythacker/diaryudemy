@@ -12,10 +12,10 @@ class App extends Component {
     };
 
     //lifecycle
-    componentDidMount() {
-        this.props.getNotes();
-        this.props.getUser();
-    }
+    // componentDidMount() {
+    //     this.props.getNotes();
+    //     this.props.getUser();
+    // }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
