@@ -12,6 +12,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import Header from './routes/Header';
 import LoadingComponent from './components/LoadingComponent';
+import AuthenticatedComponent from './components/AuthenticatedComponent';
 
 // redux store -> reducers -> actions | applyMiddleware()
 
@@ -26,8 +27,10 @@ ReactDOM.render(
                 <div>
                     <Header />
                     <Switch>
-                        <Route path='/' component={App} exact={true} />
                         <Route path='/login' component={Login} exact={true} />
+                        <AuthenticatedComponent>
+                            <Route path='/' component={App} exact={true} />
+                        </AuthenticatedComponent>
                     </Switch>
                 </div>
             </LoadingComponent>
