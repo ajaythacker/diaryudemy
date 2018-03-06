@@ -18,6 +18,6 @@ export function getUser() {
 
 export function logout() {
     return (dispatch) => {
-        auth.logout();
+        auth.signOut();
     };
 }

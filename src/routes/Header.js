@@ -28,7 +28,9 @@ class Header extends Component {
                                 </li>
                             ) : (
                                 <li>
-                                    <Link to='/logout'>Logout</Link>
+                                    <Link to='/logout' onClick={() => this.props.logout()}>
+                                        Logout
+                                    </Link>
                                 </li>
                             )}
                         </ul>
