@@ -11,12 +11,6 @@ class App extends Component {
         body: ''
     };
 
-    //lifecycle
-    // componentDidMount() {
-    //     this.props.getNotes();
-    //     this.props.getUser();
-    // }
-
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
@@ -98,12 +92,14 @@ class App extends Component {
                                     value={this.state.body}
                                 />
                             </div>
-
                             <div className='form-group'>
                                 <button className='btn btn-primary col-sm-12'>Save</button>
                             </div>
+                            <br />
+                            <br />
                         </form>
-
+                        <br />
+                        <br />
                         {this.renderNotes()}
                     </div>
                 </div>
