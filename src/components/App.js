@@ -38,9 +38,11 @@ class App extends Component {
                         <h2>{note.title}</h2>
                     </Link>
                     <p>{note.body}</p>
-                    <button className='btn btn-danger btn-xs' onClick={() => this.props.deleteNote(key)}>
-                        Delete
-                    </button>
+                    {note.uid === this.props.user.uid && (
+                        <button className='btn btn-danger btn-xs' onClick={() => this.props.deleteNote(key)}>
+                            Delete
+                        </button>
+                    )}
                 </NoteCard>
             );
         });
