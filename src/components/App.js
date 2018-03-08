@@ -82,7 +82,7 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-6 col-sm-offset-3">
+          <div className="col-sm-8 col-sm-offset-2">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input
