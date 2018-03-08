@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 //BrowserRouter will mainly create a history object to keep track of the location (URL)
 //When location changes because of a navigation action, the child component (in this case LoadingComponent) will be re-rendered
 
@@ -51,6 +51,7 @@ ReactDOM.render(
         <div>
           <Switch>
             <Route path="/login" component={Login} exact={true} />
+
             <AuthenticatedComponent>
               <Header />
               <Route path="/" component={App} exact={true} />
