@@ -1,44 +1,50 @@
-import { GET_NOTES, NOTES_STATUS } from '../actionTypes';
-import { database } from '../firebase';
+import {GET_NOTES, NOTES_STATUS} from '../actionTypes';
+import {database} from '../firebase';
 
 export function getNotes() {
-    return (dispatch) => {
+  return dispatch => {
+    dispatch({
+      //show loading to true
+      type: NOTES_STATUS,
+      payload: true
+    });
+    database.on(
+      'value',
+      snapshot => {
         dispatch({
-            //show loading to true
-            type: NOTES_STATUS,
-            payload: true
+          type: GET_NOTES,
+          payload: snapshot.val()
         });
-        database.on(
-            'value',
-            (snapshot) => {
-                dispatch({
-                    type: GET_NOTES,
-                    payload: snapshot.val()
-                });
-                dispatch({
-                    //show loading to false
-                    type: NOTES_STATUS,
-                    payload: false
-                });
-            },
-            () => {
-                dispatch({
-                    type: NOTES_STATUS,
-                    payload: -1
-                });
-            }
-        );
-    };
+        dispatch({
+          //show loading to false
+          type: NOTES_STATUS,
+          payload: false
+        });
+      },
+      () => {
+        dispatch({
+          type: NOTES_STATUS,
+          payload: -1
+        });
+      }
+    );
+  };
 }
 
 export function saveNote(note) {
-    return (dispatch) => {
-        database.push(note);
-    };
+  return dispatch => {
+    database.push(note);
+  };
 }
 
 export function deleteNote(id) {
-    return (dispatch) => {
-        database.child(id).remove();
-    };
+  return dispatch => {
+    database.child(id).remove();
+  };
+}
+
+export function editNote(id, note) {
+  return dispatch => {
+    database.child(id).update(note);
+  };
 }
