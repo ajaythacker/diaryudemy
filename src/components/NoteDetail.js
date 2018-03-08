@@ -21,7 +21,7 @@ class NoteDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        note: state.notes[ownProps.match.params.id]
+        note: state.notes[ownProps.match.params.noteid]
     };
 };
 
