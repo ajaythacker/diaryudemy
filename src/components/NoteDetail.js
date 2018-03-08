@@ -12,7 +12,7 @@ class NoteDetail extends Component {
                     <div className='col-sm-6 col-sm-offset-3'>
                         <h1>{note.title}</h1>
                         <p>{note.body}</p>
-                        <SubmitComment />
+                        <SubmitComment noteId={this.props.match.params.noteid} />
                         <Link to='/'>Back</Link>
                     </div>
                 </div>

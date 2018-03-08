@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { saveComment } from '../actions/commentAction';
 
 class SubmitComment extends Component {
+    state = {
+        commentBody: ''
+    };
+    changeHandler = (e) => {
+        this.setState({ commentBody: e.target.value });
+    };
+    submitHandler = (e) => {
+        e.preventDefault();
+        const comment = {
+            commentBody: this.state.commentBody,
+            uid: this.props.uid
+        };
+
+        this.props.saveComment(comment, this.props.noteId);
+        this.setState({ commentBody: '' });
+    };
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     <div className='form-group'>
                         <textarea
                             type='text'
@@ -13,6 +30,8 @@ class SubmitComment extends Component {
                             className='form-control no-border'
                             placeholder='Write Comment'
                             required
+                            onChange={this.changeHandler}
+                            value={this.state.comment}
                         />
                     </div>
                     <div className='form-group'>
@@ -30,4 +49,4 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-export default connect(mapStateToProps)(SubmitComment);
+export default connect(mapStateToProps, { saveComment })(SubmitComment);
